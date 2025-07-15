@@ -1,20 +1,101 @@
-# React + WordPress API + Docker
-<img width="978" height="751" alt="image" src="https://github.com/user-attachments/assets/936992f5-16fd-4c10-8c0f-967ac99241b2" />
+# React + WordPress + Laravel Full-Stack Application
 
-This project is a React application that integrates with the WordPress REST API to display posts, search functionality, and more.
+This project is a comprehensive full-stack application combining React frontend, WordPress content management, and Laravel backend API for enhanced functionality and performance.
 
-## Features
+## 🏗️ Architecture
 
+- **Frontend**: React.js with modern UI components
+- **Content Management**: WordPress integration via REST API
+- **Backend API**: Laravel for advanced features and caching
+- **Database**: MySQL for data persistence
+- **Caching**: Redis for improved performance
+- **Containerization**: Docker for easy deployment
+
+## ✨ Features
+
+### React Frontend
 - 📝 Display WordPress posts with pagination
-- 🔍 Search WordPress posts
-- 🖼️ Featured image support
-- 👤 Author and date information
+- 🔍 Advanced search functionality
+- 🏷️ Category and tag filtering
+- 📊 Blog statistics dashboard
 - 📱 Responsive design
 - ⚡ Fast loading with modern React
 
-## Quick Start
+### Laravel Backend
+- 🚀 High-performance API layer
+- 💾 Redis-based caching
+- 🔐 Authentication with Laravel Sanctum
+- 🛡️ Rate limiting and security
+- 📈 Enhanced analytics and metrics
+- 🔄 Real-time content synchronization
 
-### Option 1: Local Development
+### WordPress Integration
+- 📰 Content management via WordPress.com API
+- 🖼️ Featured image support
+- 👤 Author and metadata handling
+- 🎨 Rich content rendering
+
+## 🚀 Quick Start
+
+### Option 1: Full-Stack Development (React + Laravel + WordPress)
+
+#### 1. Install All Dependencies
+```bash
+# Install Node.js dependencies for React
+npm install
+
+# Install PHP dependencies for Laravel
+cd laravel-backend
+composer install
+cd ..
+```
+
+#### 2. Setup Laravel Backend
+```bash
+# Setup Laravel environment
+npm run laravel:setup
+
+# Run database migrations
+npm run laravel:migrate
+```
+
+#### 3. Start Development Servers
+```bash
+# Start both React and Laravel servers concurrently
+npm run dev:full
+
+# Or start individually:
+# React frontend (port 3000)
+npm start
+
+# Laravel backend (port 8000)
+npm run laravel:serve
+```
+
+#### 4. Access Services
+- React Frontend: http://localhost:3000
+- Laravel API: http://localhost:8000/api
+- API Health Check: http://localhost:8000/api/health
+
+### Option 2: Docker Development (Recommended)
+
+#### 1. Start Full Stack with Docker
+```bash
+# Start all services (React + Laravel + WordPress + MySQL + Redis)
+npm run docker:prod
+
+# Or run in background
+npm run docker:prod:bg
+```
+
+#### 2. Access Services
+- React App: http://localhost:3000
+- Laravel API: http://localhost:8001
+- WordPress: http://localhost:8080
+- phpMyAdmin: http://localhost:8081
+- Redis: localhost:6379
+
+### Option 3: Frontend Only (React + WordPress.com API)
 
 #### 1. Install Dependencies
 ```bash
@@ -31,30 +112,6 @@ const WP_API_BASE_URL = 'https://your-wordpress-site.com/wp-json/wp/v2';
 ```bash
 npm start
 ```
-
-### Option 2: Docker Development (Recommended)
-
-#### 1. Start with Docker Compose
-```bash
-# Start development environment (React + WordPress + MySQL)
-npm run docker:dev
-
-# Or run in background
-npm run docker:dev:bg
-```
-
-#### 2. Access Services
-- React App: http://localhost:3000 (with hot reload)
-- WordPress: http://localhost:8080
-- phpMyAdmin: http://localhost:8081
-
-#### 3. Configure WordPress
-1. Visit http://localhost:8080 to set up WordPress
-2. Update React app to use: `http://localhost:8080/wp-json/wp/v2`
-
-For detailed Docker instructions, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
-
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## WordPress Setup
 
@@ -99,21 +156,72 @@ Build production Docker image
 
 For detailed Docker instructions, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
 
-## Project Structure
+## 📁 Project Structure
 
 ```
-src/
-├── components/
-│   ├── WordPressPosts.js      # Main posts display component
-│   ├── WordPressPosts.css     # Posts styling
-│   ├── WordPressSearch.js     # Search functionality
-│   └── WordPressSearch.css    # Search styling
-├── services/
-│   └── wordpressApi.js        # WordPress API service
-├── config/
-│   └── wordpress.js           # WordPress configuration
-├── App.js                     # Main App component
-└── App.css                    # Main App styling
+react-wordpress/
+├── src/                          # React frontend source
+│   ├── components/              # React components
+│   │   ├── BlogStats.js        # WordPress statistics
+│   │   ├── WordPressPosts.js    # Posts display
+│   │   ├── WordPressSearch.js   # Search functionality
+│   │   └── LaravelDashboard.js  # Laravel backend dashboard
+│   ├── services/               # API services
+│   │   ├── wordpressApi.js     # WordPress API integration
+│   │   └── laravelApi.js       # Laravel API integration
+│   └── App.js                  # Main React application
+├── laravel-backend/            # Laravel API backend
+│   ├── app/                    # Laravel application
+│   │   ├── Http/Controllers/   # API controllers
+│   │   ├── Services/          # Business logic services
+│   │   └── Models/            # Eloquent models
+│   ├── config/                # Configuration files
+│   ├── routes/               # API routes
+│   └── database/             # Migrations and seeders
+├── public/                   # React build output
+├── docker-compose.yml        # Docker production setup
+├── docker-compose.dev.yml    # Docker development setup
+├── README.md                # This file
+├── LARAVEL_SETUP.md         # Laravel setup guide
+├── LARAVEL_WORDPRESS.md     # Technical integration guide
+└── package.json             # Node.js dependencies and scripts
+```
+
+## 🔧 Development Scripts
+
+### Full-Stack Development
+```bash
+# Setup everything at once
+npm run setup:all
+
+# Start both React and Laravel servers
+npm run dev:full
+
+# Start all services with Docker
+npm run docker:dev
+```
+
+### Frontend Only
+```bash
+npm start                    # Start React development server
+npm run build               # Build for production
+npm test                    # Run tests
+```
+
+### Laravel Backend
+```bash
+npm run laravel:install     # Install PHP dependencies
+npm run laravel:setup       # Setup Laravel environment
+npm run laravel:serve       # Start Laravel server
+npm run laravel:migrate     # Run database migrations
+npm run laravel:test        # Run Laravel tests
+```
+
+### Docker Commands
+```bash
+npm run docker:prod         # Production Docker setup
+npm run docker:dev          # Development Docker setup
+npm run docker:stop         # Stop all containers
 ```
 
 ## Customization

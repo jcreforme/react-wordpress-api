@@ -25,7 +25,15 @@
     "docker:stop": "docker-compose down",
     "docker:stop:dev": "docker-compose -f docker-compose.dev.yml down",
     "docker:build": "docker build -t react-wordpress-api .",
-    "docker:run": "docker run -p 3000:80 react-wordpress-api"
+    "docker:run": "docker run -p 3000:80 react-wordpress-api",
+    "laravel:install": "cd laravel-backend && composer install",
+    "laravel:setup": "cd laravel-backend && cp .env.example .env && php artisan key:generate",
+    "laravel:migrate": "cd laravel-backend && php artisan migrate",
+    "laravel:serve": "cd laravel-backend && php artisan serve --port=8000",
+    "laravel:cache": "cd laravel-backend && php artisan config:cache && php artisan route:cache",
+    "laravel:test": "cd laravel-backend && php artisan test",
+    "dev:full": "concurrently \"npm start\" \"npm run laravel:serve\"",
+    "setup:all": "npm install && npm run laravel:install && npm run laravel:setup"
   },
   "eslintConfig": {
     "extends": [
