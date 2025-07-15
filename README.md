@@ -4,10 +4,11 @@
 
 This project is a comprehensive full-stack application combining React frontend, WordPress content management, and Laravel backend API for enhanced functionality and performance.
 
-## 🏗️ Architecture
 
 **Laravel as Backend**
 <img width="1689" height="852" alt="Laravel Backend Architecture" src="https://github.com/user-attachments/assets/b02049c3-ff52-45c6-ae6b-71eed10e62bc" />
+
+## 🏗️ Architecture
 
 ### System Components
 
