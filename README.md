@@ -1,8 +1,15 @@
 # React + WordPress + Laravel Full-Stack Application
 
+<img width="958" height="974" alt="React WordPress Application" src="https://github.com/user-attachments/assets/af241390-bf1a-49a5-acf5-27024f8ff323" />
+
 This project is a comprehensive full-stack application combining React frontend, WordPress content management, and Laravel backend API for enhanced functionality and performance.
 
 ## 🏗️ Architecture
+
+**Laravel as Backend**
+<img width="1689" height="852" alt="Laravel Backend Architecture" src="https://github.com/user-attachments/assets/b02049c3-ff52-45c6-ae6b-71eed10e62bc" />
+
+### System Components
 
 - **Frontend**: React.js with modern UI components
 - **Content Management**: WordPress integration via REST API
