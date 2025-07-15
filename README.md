@@ -13,21 +13,45 @@ This project is a React application that integrates with the WordPress REST API 
 
 ## Quick Start
 
-### 1. Install Dependencies
+### Option 1: Local Development
+
+#### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### 2. Configure WordPress URL
+#### 2. Configure WordPress URL
 Update your WordPress site URL in `src/services/wordpressApi.js`:
 ```javascript
 const WP_API_BASE_URL = 'https://your-wordpress-site.com/wp-json/wp/v2';
 ```
 
-### 3. Start Development Server
+#### 3. Start Development Server
 ```bash
 npm start
 ```
+
+### Option 2: Docker Development (Recommended)
+
+#### 1. Start with Docker Compose
+```bash
+# Start development environment (React + WordPress + MySQL)
+npm run docker:dev
+
+# Or run in background
+npm run docker:dev:bg
+```
+
+#### 2. Access Services
+- React App: http://localhost:3000 (with hot reload)
+- WordPress: http://localhost:8080
+- phpMyAdmin: http://localhost:8081
+
+#### 3. Configure WordPress
+1. Visit http://localhost:8080 to set up WordPress
+2. Update React app to use: `http://localhost:8080/wp-json/wp/v2`
+
+For detailed Docker instructions, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
@@ -43,28 +67,36 @@ https://your-wordpress-site.com/wp-json/wp/v2/posts
 
 ## Available Scripts
 
-In the project directory, you can run:
+### Development Scripts
 
-### `npm start`
-
-Runs the app in the development mode.\
+#### `npm start`
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### `npm test`
+Launches the test runner in the interactive watch mode.
 
-### `npm test`
+#### `npm run build`
+Builds the app for production to the `build` folder.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Docker Scripts
 
-### `npm run build`
+#### `npm run docker:dev`
+Start development environment with Docker (React + WordPress + MySQL)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### `npm run docker:dev:bg`
+Start development environment in background
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### `npm run docker:prod`
+Start production environment with Docker
+
+#### `npm run docker:stop`
+Stop all Docker services
+
+#### `npm run docker:build`
+Build production Docker image
+
+For detailed Docker instructions, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
 
 ## Project Structure
 

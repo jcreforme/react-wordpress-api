@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # React Development Server
+  react-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    networks:
+      - dev-network
+
+  # WordPress for development
+  wordpress-dev:
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql-dev
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wordpress_dev_data:/var/www/html
+      - ./wordpress-content:/var/www/html/wp-content
+    depends_on:
+      - mysql-dev
+    restart: unless-stopped
+    networks:
+      - dev-network
+
+  # MySQL for development
+  mysql-dev:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - dev-network
+
+  # phpMyAdmin for development
+  phpmyadmin-dev:
+    image: phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-dev
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    depends_on:
+      - mysql-dev
+    restart: unless-stopped
+    networks:
+      - dev-network
+
+volumes:
+  wordpress_dev_data:
+  mysql_dev_data:
+
+networks:
+  dev-network:
+    driver: bridge

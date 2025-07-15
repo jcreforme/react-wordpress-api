@@ -85,15 +85,34 @@ Header add Access-Control-Allow-Headers "Content-Type, Authorization"
 
 ## 6. Development
 
-### Start Development Server
+### Local Development
 ```bash
 npm start
+```
+
+### Docker Development (Recommended)
+```bash
+# Start complete development environment
+npm run docker:dev
+
+# Access services:
+# - React App: http://localhost:3000
+# - WordPress: http://localhost:8080  
+# - phpMyAdmin: http://localhost:8081
 ```
 
 ### Build for Production
 ```bash
 npm run build
 ```
+
+### Docker Production
+```bash
+# Build and run production containers
+npm run docker:prod
+```
+
+For detailed Docker instructions, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
 
 ## 7. Troubleshooting
 

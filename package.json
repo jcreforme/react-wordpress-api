@@ -17,7 +17,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
+    "docker:dev:bg": "docker-compose -f docker-compose.dev.yml up -d --build",
+    "docker:prod": "docker-compose up --build",
+    "docker:prod:bg": "docker-compose up -d --build",
+    "docker:stop": "docker-compose down",
+    "docker:stop:dev": "docker-compose -f docker-compose.dev.yml down",
+    "docker:build": "docker build -t react-wordpress-api .",
+    "docker:run": "docker run -p 3000:80 react-wordpress-api"
   },
   "eslintConfig": {
     "extends": [
