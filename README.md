@@ -3,6 +3,9 @@
 
 This project is a React application that integrates with the WordPress REST API to display posts, search functionality, and more.
 
+The Laravel as Backend
+<img width="1689" height="852" alt="image" src="https://github.com/user-attachments/assets/b02049c3-ff52-45c6-ae6b-71eed10e62bc" />
+
 ## Features
 
 - 📝 Display WordPress posts with pagination
