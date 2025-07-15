@@ -1,4 +1,4 @@
-# React WordPress API
+# React + WordPress API + Docker
 <img width="978" height="751" alt="image" src="https://github.com/user-attachments/assets/936992f5-16fd-4c10-8c0f-967ac99241b2" />
 
 This project is a React application that integrates with the WordPress REST API to display posts, search functionality, and more.
