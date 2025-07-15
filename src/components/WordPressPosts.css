@@ -162,6 +162,31 @@
   text-decoration: none;
 }
 
+/* Post Actions */
+.post-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.details-button {
+  background-color: transparent;
+  color: #0073aa;
+  border: 2px solid #0073aa;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.details-button:hover {
+  background-color: #0073aa;
+  color: white;
+}
+
 /* Pagination */
 .pagination {
   display: flex;

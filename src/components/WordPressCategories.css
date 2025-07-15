@@ -1,0 +1,146 @@
+.wordpress-categories {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  padding: 20px;
+}
+
+.wordpress-categories h3 {
+  color: #333;
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.category-button {
+  background: white;
+  border: 2px solid #e1e5e9;
+  color: #333;
+  padding: 10px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-button:hover {
+  border-color: #0073aa;
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 115, 170, 0.1);
+}
+
+.category-button.active {
+  background-color: #0073aa;
+  border-color: #0073aa;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 115, 170, 0.2);
+}
+
+.category-button.active:hover {
+  background-color: #005a87;
+  border-color: #005a87;
+}
+
+.post-count {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.category-button.active .post-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Loading State */
+.categories-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  color: #666;
+}
+
+.loading-spinner-small {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #0073aa;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Error State */
+.categories-error {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e1e5e9;
+}
+
+.categories-error p {
+  color: #dc3545;
+  margin: 0 0 15px 0;
+}
+
+.retry-button-small {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.retry-button-small:hover {
+  background-color: #5a6268;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wordpress-categories {
+    padding: 15px;
+  }
+  
+  .categories-list {
+    gap: 8px;
+  }
+  
+  .category-button {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  
+  .wordpress-categories h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-list {
+    justify-content: flex-start;
+  }
+  
+  .category-button {
+    flex: 1;
+    min-width: calc(50% - 4px);
+    justify-content: center;
+  }
+}

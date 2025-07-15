@@ -1,17 +1,19 @@
 import React from 'react';
 import './App.css';
-import WordPressPosts from './components/WordPressPosts';
+import BlogStats from './components/BlogStats';
 import WordPressSearch from './components/WordPressSearch';
+import WordPressPosts from './components/WordPressPosts';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>React WordPress API</h1>
-        <p>Connect your React app to WordPress REST API</p>
+        <p>Exploring jcreforme.home.blog with React</p>
       </header>
       
       <main className="App-main">
+        <BlogStats />
         <WordPressSearch />
         <WordPressPosts />
       </main>

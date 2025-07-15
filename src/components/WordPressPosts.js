@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { wordpressApi } from '../services/wordpressApi';
+import WordPressCategories from './WordPressCategories';
+import PostDetails from './PostDetails';
 import './WordPressPosts.css';
 
 const WordPressPosts = () => {
@@ -8,19 +10,28 @@ const WordPressPosts = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [expandedPost, setExpandedPost] = useState(null);
 
   useEffect(() => {
     fetchPosts();
-  }, [currentPage]);
+  }, [currentPage, selectedCategory]);
 
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const fetchedPosts = await wordpressApi.getPosts({
+      const params = {
         page: currentPage,
         per_page: postsPerPage,
         _embed: true // Include embedded data like featured images
-      });
+      };
+      
+      // Add category filter if selected
+      if (selectedCategory) {
+        params.categories = selectedCategory;
+      }
+      
+      const fetchedPosts = await wordpressApi.getPosts(params);
       setPosts(fetchedPosts);
       setError(null);
     } catch (err) {
@@ -29,6 +40,16 @@ const WordPressPosts = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategory(categoryId);
+    setCurrentPage(1); // Reset to first page when filtering
+    setExpandedPost(null); // Collapse any expanded post
+  };
+
+  const togglePostDetails = (postId) => {
+    setExpandedPost(expandedPost === postId ? null : postId);
   };
 
   const stripHtml = (html) => {
@@ -74,8 +95,14 @@ const WordPressPosts = () => {
     <div className="wordpress-posts">
       <h1>WordPress Posts</h1>
       
+      {/* Categories Filter */}
+      <WordPressCategories
+        selectedCategory={selectedCategory}
+        onCategorySelect={handleCategorySelect}
+      />
+      
       {posts.length === 0 ? (
-        <p>No posts found.</p>
+        <p>No posts found{selectedCategory ? ' in this category' : ''}.</p>
       ) : (
         <div className="posts-grid">
           {posts.map((post) => (
@@ -115,15 +142,29 @@ const WordPressPosts = () => {
                   )}
                 </div>
                 
-                <a 
-                  href={post.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="read-more"
-                >
-                  Read More
-                </a>
+                <div className="post-actions">
+                  <button
+                    onClick={() => togglePostDetails(post.id)}
+                    className="details-button"
+                  >
+                    {expandedPost === post.id ? '▼ Hide Details' : '▶ Show Details'}
+                  </button>
+                  
+                  <a 
+                    href={post.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="read-more"
+                  >
+                    Read More →
+                  </a>
+                </div>
               </div>
+              
+              {/* Expanded Post Details */}
+              {expandedPost === post.id && (
+                <PostDetails post={post} />
+              )}
             </article>
           ))}
         </div>
