@@ -1,11 +1,16 @@
 import axios from 'axios';
 
-// WordPress API base URL - replace with your WordPress site URL
-const WP_API_BASE_URL = 'https://your-wordpress-site.com/wp-json/wp/v2';
+// WordPress.com API configuration
+// For WordPress.com sites, use the WordPress.com REST API
+const WORDPRESS_COM_SITE = 'jcreforme.home.blog';
+const WP_COM_API_BASE_URL = `https://public-api.wordpress.com/wp/v2/sites/${WORDPRESS_COM_SITE}`;
+
+// Alternative: For self-hosted WordPress sites, use:
+// const WP_API_BASE_URL = 'https://your-wordpress-site.com/wp-json/wp/v2';
 
 // Create axios instance with default config
 const wpApi = axios.create({
-  baseURL: WP_API_BASE_URL,
+  baseURL: WP_COM_API_BASE_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

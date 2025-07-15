@@ -4,36 +4,87 @@
 
 This React app is configured to work with the WordPress REST API. Follow these steps to connect it to your WordPress site.
 
+## WordPress.com vs Self-Hosted WordPress
+
+### WordPress.com Sites (Like yours: jcreforme.home.blog)
+WordPress.com sites use a different API endpoint structure:
+- **API URL:** `https://public-api.wordpress.com/wp/v2/sites/YOUR-SITE.com`
+- **Example:** `https://public-api.wordpress.com/wp/v2/sites/jcreforme.home.blog/posts`
+- **CORS:** No CORS issues (WordPress.com handles this)
+- **Authentication:** Public posts are accessible without authentication
+
+### Self-Hosted WordPress Sites
+Self-hosted WordPress sites use the standard REST API:
+- **API URL:** `https://your-wordpress-site.com/wp-json/wp/v2`
+- **CORS:** May require configuration
+- **Authentication:** May require API keys for private content
+
 ## 1. WordPress REST API Setup
 
 ### Enable WordPress REST API
 The WordPress REST API is enabled by default in WordPress 4.7+. No additional setup is required for basic functionality.
 
 ### Verify API Access
-Test your WordPress REST API by visiting:
+
+#### For WordPress.com Sites (like jcreforme.home.blog):
+```
+https://public-api.wordpress.com/wp/v2/sites/jcreforme.home.blog/posts
+```
+
+#### For Self-Hosted WordPress Sites:
 ```
 https://your-wordpress-site.com/wp-json/wp/v2/posts
 ```
 
 ## 2. Configure Your WordPress URL
 
-### Update the API Base URL
-1. Open `src/services/wordpressApi.js`
-2. Replace `'https://your-wordpress-site.com/wp-json/wp/v2'` with your actual WordPress site URL
-3. Example: `'https://myblog.com/wp-json/wp/v2'`
+### For WordPress.com Sites (Current Configuration)
+Your site `jcreforme.home.blog` is already configured in `src/services/wordpressApi.js`:
+```javascript
+const WORDPRESS_COM_SITE = 'jcreforme.home.blog';
+const WP_COM_API_BASE_URL = `https://public-api.wordpress.com/wp/v2/sites/${WORDPRESS_COM_SITE}`;
+```
 
-### Alternative Configuration
+To change to a different WordPress.com site:
+1. Open `src/services/wordpressApi.js`
+2. Update the `WORDPRESS_COM_SITE` variable with your site domain
+3. Example: `const WORDPRESS_COM_SITE = 'myblog.wordpress.com';`
+
+### For Self-Hosted WordPress Sites
+If you want to connect to a self-hosted WordPress site instead:
+1. Open `src/services/wordpressApi.js`
+2. Replace the WordPress.com configuration with:
+```javascript
+const WP_API_BASE_URL = 'https://your-wordpress-site.com/wp-json/wp/v2';
+
+const wpApi = axios.create({
+  baseURL: WP_API_BASE_URL,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+```
+
+### Alternative Configuration Method
 You can also update the configuration in `src/config/wordpress.js`:
 ```javascript
 export const WORDPRESS_CONFIG = {
-  API_BASE_URL: 'https://your-wordpress-site.com/wp-json/wp/v2',
-  // ... other settings
+  // For WordPress.com sites
+  API_BASE_URL: 'https://public-api.wordpress.com/wp/v2/sites/your-site.com',
+  
+  // Or for self-hosted sites
+  // API_BASE_URL: 'https://your-wordpress-site.com/wp-json/wp/v2',
 };
 ```
 
 ## 3. CORS (Cross-Origin Resource Sharing)
 
-If you encounter CORS errors, you may need to configure your WordPress site to allow cross-origin requests.
+### WordPress.com Sites
+✅ **No CORS configuration needed!** WordPress.com automatically handles CORS headers for public API access.
+
+### Self-Hosted WordPress Sites
+If you encounter CORS errors with self-hosted WordPress sites, you may need to configure your WordPress site to allow cross-origin requests.
 
 ### Option 1: WordPress Plugin
 Install a CORS plugin like "CORS" by WP CORS
