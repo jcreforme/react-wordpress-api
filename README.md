@@ -1,6 +1,45 @@
-# Getting Started with Create React App
+# React WordPress API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React application that integrates with the WordPress REST API to display posts, search functionality, and more.
+
+## Features
+
+- 📝 Display WordPress posts with pagination
+- 🔍 Search WordPress posts
+- 🖼️ Featured image support
+- 👤 Author and date information
+- 📱 Responsive design
+- ⚡ Fast loading with modern React
+
+## Quick Start
+
+### 1. Install Dependencies
+```bash
+npm install
+```
+
+### 2. Configure WordPress URL
+Update your WordPress site URL in `src/services/wordpressApi.js`:
+```javascript
+const WP_API_BASE_URL = 'https://your-wordpress-site.com/wp-json/wp/v2';
+```
+
+### 3. Start Development Server
+```bash
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## WordPress Setup
+
+For detailed WordPress configuration instructions, see [WORDPRESS_SETUP.md](./WORDPRESS_SETUP.md).
+
+### Quick WordPress API Test
+Verify your WordPress REST API is working by visiting:
+```
+https://your-wordpress-site.com/wp-json/wp/v2/posts
+```
 
 ## Available Scripts
 
@@ -27,44 +66,55 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Project Structure
 
-### `npm run eject`
+```
+src/
+├── components/
+│   ├── WordPressPosts.js      # Main posts display component
+│   ├── WordPressPosts.css     # Posts styling
+│   ├── WordPressSearch.js     # Search functionality
+│   └── WordPressSearch.css    # Search styling
+├── services/
+│   └── wordpressApi.js        # WordPress API service
+├── config/
+│   └── wordpress.js           # WordPress configuration
+├── App.js                     # Main App component
+└── App.css                    # Main App styling
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Customization
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Styling
+- Modify CSS files in `src/components/` for component-specific styles
+- Update `src/App.css` for global application styles
+- All styles are responsive and mobile-friendly
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### API Configuration
+- Update `src/config/wordpress.js` for WordPress settings
+- Modify `src/services/wordpressApi.js` to add new API methods
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Troubleshooting
+
+### CORS Issues
+If you encounter CORS errors, you may need to configure your WordPress server to allow cross-origin requests. See [WORDPRESS_SETUP.md](./WORDPRESS_SETUP.md) for solutions.
+
+### API Connection
+Test your WordPress REST API directly:
+```
+https://your-wordpress-site.com/wp-json/wp/v2/posts
+```
+
+## Technologies Used
+
+- React 19.1.0
+- Axios for HTTP requests
+- WordPress REST API
+- Modern CSS with Flexbox/Grid
+- Responsive design principles
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [WordPress REST API Documentation](https://developer.wordpress.org/rest-api/)
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React documentation](https://reactjs.org/)
