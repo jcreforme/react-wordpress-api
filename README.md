@@ -255,8 +255,8 @@ https://your-wordpress-site.com/wp-json/wp/v2/posts
 ```
 
 ##📁 Complete Laravel Backend Structure
--laravel-backend directory with full Laravel application
--RESTful API endpoints for WordPress integration
+- laravel-backend directory with full Laravel application
+- RESTful API endpoints for WordPress integration
 -Advanced caching with Redis support
 -Rate limiting and security middleware
 -CORS configuration for React frontend
